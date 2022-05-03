@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="carregar()">
+    <button type="button" onclick="redirecionar()">REDIRECIONAR</button>
+    <h1 onmouseover="trocar(this)" onmouseout="voltar(this)">1</h1>
+    <h1 onmouseover="trocar(this)" onmouseout="voltar(this)" style="margin-top: 5px;">2</h1>
+
+    <select onchange="change(this)">
+        <option value="1">Valor 1</option>
+        <option value="2">Valor 2</option>
+    </select>
+</body>
+</html>
+
+<script>
+    var carregar = () => {
+        alert('pagina carregada!')
+    }
+    var redirecionar = () => {
+        window.open('https://www.google.com.br')//abre em outra aba
+        //window.location.href = 'https://www.google.com.br' //abra na mesma aba
+    }
+
+    var trocar = (elemento) => {
+        //document.querySelector("#div").innerHTML = "2"
+        elemento.innerHTML = "2"
+    }
+
+    var voltar = (elemento) => {
+        //let div = document.getElementById("div")
+        elemento.innerHTML = "1"
+    }
+
+    var change = (elemento) => {
+        alert(elemento.value)
+    }
+</script>

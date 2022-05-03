@@ -1,0 +1,25 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: brown;
+}
+
+header{
+    color: white;
+    text-align: center;
+}
+
+section{
+    width: 70%;
+    margin: auto;
+    box-shadow: 10px 10px 15px gray;
+    border-radius: 15px;
+    padding: 15px;
+    background-color: white;
+}
+
+footer{
+    color: white;
+    text-align: center;
+    font-style: oblique;
+}

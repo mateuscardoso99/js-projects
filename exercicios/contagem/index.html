@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+	<header>
+		<h1 class="text-center">Contagem dias de vida</h1>
+	</header>
+
+	<section>
+		<div id="info">
+			<p>
+			Digite a sua data de nascimento:
+			<input type="number" id="txtdia" min="1" max="31">
+			/
+			<input type="number" id="txtmes" min="1" max="12">
+			/
+			<input type="number" id="txtano" min="0" max="2020"> 
+			<button type="button" onclick="contagem()">Contar!</button>
+			</p>
+		</div>
+
+		<div id="resultado">
+			
+		</div>
+
+	</section>
+
+	<script src="script.js"></script>
+</body>
+</html>

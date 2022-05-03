@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento HTML 3</title>
+    <style>
+        body{
+            background-color: orange;
+            font: 100 arial;
+        }
+        h1, p{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript</h1>
+    <p>Primeiro parágrafo do documento2</p>
+    <script>     
+        var n1 = Number(window.prompt('digite um número:'))// window.prompt retorna string
+        var n2 = Number(window.prompt('digite outro número:'))
+        //função Number converte pra valor numérico
+        //Number.parseInt() converte pra inteiro
+        //Number.parseFloat() converte pra float
+        //String(valor) converte pra string
+        //valor.toString() converte pra string
+
+        var soma = n1 + n2
+        window.alert(`resultado: ${soma}`)//TEMPLATE STRING
+        // + serve para adição e concatenação
+        //`aluno ${nome} de ${idade}
+        // anos tirou ${nota}` usando template string
+    </script>
+</body>
+</html>

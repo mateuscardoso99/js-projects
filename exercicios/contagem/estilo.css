@@ -1,0 +1,17 @@
+body{
+	background: tomato;
+	font-size: 10pt;
+}
+
+header{
+	color: black;
+	text-align: center;
+}
+
+section{
+	padding: 15px;
+	background: white;
+	margin: auto;
+	width: 70%;
+	border-radius: 15px 15px 15px blue;
+}

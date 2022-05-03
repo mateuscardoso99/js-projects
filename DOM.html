@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Começando em DOM</title>
+    <style>
+        body{
+            background-color: royalblue;
+            color: white;
+            font: normal 18pt Arial;
+        }
+    </style>
+</head>
+<body>
+    <h1>Iniciando estudos DOM</h1>
+    <p>Aqui vai o resultado</p>
+    <p>Aprendendo a usar o <strong>DOM</strong> em JavaScript</p>
+    <div id="msg">Clique em mim</div>
+    <div class = "exemplo">exemplo</div>
+    <div name ="d1" >div 3</div>
+
+    <script>
+        //window.document.write(window.navigator.appName)
+        //mostrando o navegador usado
+        //window.document.write(window.document.URL)
+        //mostrando a URL
+
+        /*var pg = document.getElementsByTagName("p")[0]
+//PEGANDO TODAS AS TAGS <P>, NESSE CASO O "[0]" ESPECIFICA
+//PARA PEGAR SÓ A PRIMEIRA TAG <P>
+        document.write(pg.innerText)
+//ESCREVENDO O CONTEÚDO DA TAG DO COMANDO ANTERIOR
+//innerHTML PEGA O CONTEÚDO COM FORMATAÇÃO*/
+
+        /*var corpo = window.document.body
+        corpo.style.background = "red"*/
+//MODIFICANDO A COR DE FUNDO DA PÁGINA
+
+
+       /* var d = window.document.getElementById("msg")
+//PEGANDO A TAG PELO ID DELA
+        d.style.background = "green"//TROCANDO A COR DE FUNDO
+        d.innerText = "alterando o conteúdo com JS"*/
+
+        //var c = document.getElementsByClassName("exemplo")
+//PEGANDO A TAG PELA CLASSE DELA
+
+       // var j = document.getElementsByName("d1")[0]
+       // j.style.background = "red"
+//PEGANDO A TAG PELO NOME DELA, O "[0]" ESPECIFICA
+//PARA PEGAR SÓ A PRIMEIRA TAG
+
+        /*var e = document.querySelector('div#msg')//ID REPRESENTADO PELO "#"
+        var f = document.querySelector('div.exemplo')//CLASSE REPRESENTADO PELO "."
+//USANDO QUERYSELECTOR
+        e.style.background = "green"
+        f.innerText = "alterando o conteúdo com JS"*/
+    </script>
+</body>
+</html>
