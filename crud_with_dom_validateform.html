@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>JS</title>
+		<style>
+			body{
+				font-family: Verdana, Arial, sans-serif;
+				margin: 30px;
+			}
+			.form-cadastro{
+				max-width: 400px;
+			    border: 1px solid #cccccc;
+			    border-radius: 10px;
+			    padding: 20px;
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+			    margin: 25px auto;
+			    background-color: #f2f2f2;
+			}
+			.form-cadastro form{
+				width: 100%;
+				padding: 10px;
+			}
+			.form-cadastro form h1{
+				text-align: center;
+    			margin: 15px 0;
+			}
+			.btn-salvar{
+				width: 100%;
+			    height: 40px;
+			    background-color: #5757ff;
+			    color: #fff;
+			    border: none;
+			    border-radius: 10px;
+			    font-size: 20px;
+			    margin-top: 10px;
+			    cursor: pointer;
+			}
+			.field{
+				display: flex;
+			    flex-direction: column;
+			    margin-bottom: 20px;
+			}
+			.field label{
+				font-weight: bold;
+				margin: 5px;
+			}
+			.field input{
+			    height: 30px;
+			    border: 1px solid #cccccc;
+			    border-radius: 5px;
+			}
+			.field span{
+				display: none;
+				color: #ff0000;
+				font-weight: bold;
+				margin-top: 2px;
+
+			}
+			.field.success input {
+			    border-color: #09c372;
+			}
+			.field.error input {
+			    border-color: #ff3860;
+			}
+			.field .error {
+			    color: #ff3860;
+			    font-size: 15px;
+			    height: 13px;
+			}
+			.container-table{
+				overflow-x: auto;
+			}
+			.container-table h2{
+				text-align: center;
+			}
+			.modal{
+				display: none;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+			    height: 100%;
+			    z-index: 1;
+			    position: fixed;
+			    top: 0;
+			    left: 0;
+			    overflow: auto;
+			    background-color: rgba(0,0,0,0.4);
+			}
+			.modal .modal-content{
+				background-color: #fefefe;
+				padding: 50px;
+				border: 1px solid #888;
+				width: 50%;
+			}
+			.modal-content .close{
+				display: block;
+				color: #aaa;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+			}
+			.modal-content .close:hover,.modal-content .close:focus {
+				color: black;
+				text-decoration: none;
+				cursor: pointer;
+			}
+			.opcoes{
+				display: flex;
+				justify-content: center;
+			}
+			.btn-delete,.btn-update{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #fff;
+			    width: 125px;
+			    height: 30px;
+			    border-radius: 10px;
+			    padding: 10px;
+			    border: none;
+			    cursor: pointer;
+			}
+			.btn-delete{
+				background-color: #ff0000;
+			}
+			.btn-update{
+				background-color: #ffa500;
+				margin-left: 5px;
+			}
+			table{
+				width: 100%;
+				border: 1px solid #f2f2f2;
+				border-collapse: collapse;
+			}
+			th, td{
+				padding: 15px;
+				text-align: center;
+			}
+			th{
+				background-color: #5757ff;
+				color: #fff;
+			}
+			tr:hover{
+				background-color: #9ccdff !important;
+			}
+			tr:nth-child(even){
+				background-color: #f2f2f2;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="form-cadastro">
+			<form id="form" name="form">
+				<h1>Cadastrar clientes</h1>
+
+				<div class="field">
+					<label>Nome</label>
+					<input type="text" name="nome" id="nome">
+					<span id="error-nome">Informe o nome</span>
+				</div>
+
+				<div class="field">
+					<label>E-mail</label>
+					<input type="email" name="email" id="email">
+					<span id="error-email">Informe o email</span>
+				</div>
+
+				<div class="field">
+					<label>CPF</label>
+					<input type="text" name="cpf" id="cpf">
+					<span id="error-cpf">Informe o cpf</span>
+				</div>
+
+				<button class="btn-salvar" type="submit">SALVAR</button>
+			</form>
+		</div>
+
+		<hr>
+		
+		<div class="container-table">
+			<h2>Clientes</h2>
+			<table id="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Email</th>
+						<th>CPF</th>
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody id="table-body"></tbody>
+			</table>
+		</div>
+
+		<div class="modal" id="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closeModal()">&times;</span>
+				<h1>Editar cliente</h1>
+
+				<div class="update">
+					<input type="hidden" name="cliente-id" id="cliente-id">
+
+					<div class="field">
+						<label>Nome</label>
+						<input type="text" name="update-nome" id="update-nome">
+						<div class="error"></div>
+					</div>
+
+					<div class="field">
+						<label>E-mail</label>
+						<input type="email" name="update-email" id="update-email">
+						<div class="error"></div>
+					</div>
+
+					<div class="field">
+						<label>CPF</label>
+						<input type="text" name="update-cpf" id="update-cpf">
+						<div class="error"></div>
+					</div>
+
+					<button class="btn-salvar" type="button" onclick="handleUpdate()">SALVAR</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		const form = document.getElementById("form")
+
+		const clientes = []
+
+		const listClientes = () => {
+			const tbody = document.getElementById("table-body")
+			tbody.innerHTML = ""
+
+			for(cliente of clientes){
+				const tr = document.createElement("tr")
+
+				tr.setAttribute('id',`${cliente.id}`)
+				tr.innerHTML = `<td>${cliente.nome}</td>
+								<td>${cliente.email}</td>
+								<td>${cliente.cpf}</td>
+								<td class="opcoes">
+									<button class="btn-delete" type="button" onclick="deleteCliente('${cliente.id}')">
+										APAGAR
+									</button>
+									<button class="btn-update" type="button" onclick="updateCliente('${cliente.id}')">
+										EDITAR
+									</button>
+								</td>`
+				tbody.append(tr)
+			}
+		}
+
+		form.addEventListener("submit",function(event) {
+			event.preventDefault()
+			
+			let valid = true
+			const inputs = document.querySelectorAll("#form input")
+
+			for(let i=0;i<inputs.length;i++){
+				if (inputs[i].value == "") {
+					document.getElementById(`error-${inputs[i].name}`).style.display = "block"
+					valid = false
+				}
+				else{
+					document.getElementById(`error-${inputs[i].name}`).style.display = "none"
+				}
+			}
+
+			if(valid == true){
+				const nome = document.getElementById("nome")
+				const email = document.getElementById("email")
+				const cpf = document.getElementById("cpf")
+
+				let id = Math.floor(Math.random() * (99999999 - 0 + 1)) + 0;
+
+				const newCliente = {
+					id,
+					nome: nome.value,
+					email: email.value,
+					cpf: cpf.value
+				}
+
+				clientes.push(newCliente)
+
+				listClientes()
+
+				nome.value = ""
+				email.value = ""
+				cpf.value = ""
+
+				nome.focus()
+			}
+		})
+
+		function deleteCliente(id){
+			const cliente = clientes.findIndex(cliente => cliente.id == id)
+			clientes.splice(cliente,1)
+			listClientes()
+		}
+
+		function updateCliente(id){
+			const cliente = clientes.find(cliente => cliente.id == id)
+			const modal = document.getElementById("modal")
+
+			document.getElementById("update-nome").value = cliente.nome
+			document.getElementById("update-email").value = cliente.email
+			document.getElementById("update-cpf").value = cliente.cpf
+			document.getElementById("cliente-id").value = cliente.id
+			modal.style.display = "flex"
+		}
+
+		const handleUpdate = function(){
+			const nomeUpdate = document.getElementById("update-nome")
+			const emailUpdate = document.getElementById("update-email")
+			const cpfUpdate = document.getElementById("update-cpf")
+			const clienteId = document.getElementById("cliente-id")
+
+			const isValid = validateInputsUpdate(nomeUpdate,emailUpdate,cpfUpdate)
+
+			if(isValid == true){
+
+				// const tr = document.getElementById(clienteId.value)
+				// //remove all childs
+				// while(tr.firstChild){
+				// 	tr.removeChild(tr.firstChild)
+				// }
+				const cliente = clientes.findIndex(cliente => cliente.id == clienteId.value)
+
+				const updateCliente = {
+					id: clienteId,
+					nome: nomeUpdate.value,
+					email: emailUpdate.value,
+					cpf: cpfUpdate.value
+				}
+
+				clientes[cliente] = updateCliente
+				listClientes()
+
+				nomeUpdate.value = ""
+				emailUpdate.value = ""
+				cpfUpdate.value = ""
+
+				modal.style.display = "none"
+			}
+		}
+
+		const closeModal = () => document.getElementById("modal").style.display = "none"
+
+		const validateInputsUpdate = function(nomeUpdate,emailUpdate,cpfUpdate){
+			const nomeValue = nomeUpdate.value.trim();
+		    const emailValue = emailUpdate.value.trim();
+		    const cpfValue = cpfUpdate.value.trim();
+
+		    let valid = true
+
+		    if(nomeValue === '') {
+		        setError(nomeUpdate, 'nome é obrigatório');
+		        valid = false
+		    }
+		    else {
+		        setSuccess(nomeUpdate);
+		    }
+
+		    if(emailValue === '') {
+			    setError(emailUpdate, 'Email é obrigatório');
+			    valid = false
+			} else if (!validateEmail(emailValue)) {
+			    setError(emailUpdate, 'email inválido');
+			    valid = false
+			} else {
+		        setSuccess(emailUpdate);
+		    }
+
+			if(cpfValue === ''){
+				setError(cpfUpdate, 'CPF inválido');
+			    valid = false
+			} else if(!validateCpf(cpfValue)) {
+				setError(cpfUpdate, 'CPF inválido')
+				valid = false
+			} else {
+		        setSuccess(cpfUpdate);
+		    }
+
+			return valid
+		}
+
+		const validateEmail = email => {
+			const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    		return regex.test(String(email).toLowerCase());
+		}
+
+		const validateCpf = cpf => {
+			const regex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/
+			return regex.test(String(cpf).toLowerCase())
+		}
+
+		const setError = (element, message) => {
+		    const inputControl = element.parentElement;
+		    const errorDisplay = inputControl.querySelector('.error');
+
+		    errorDisplay.innerText = message;
+		    inputControl.classList.add('error');
+		}
+
+		const setSuccess = element => {
+		    const inputControl = element.parentElement;
+		    const errorDisplay = inputControl.querySelector('.error');
+
+		    errorDisplay.innerText = '';
+		    inputControl.classList.add('success');
+		    inputControl.classList.remove('error');
+		};
+	</script>
+</html>
