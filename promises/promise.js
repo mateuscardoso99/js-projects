@@ -34,7 +34,7 @@ function realizada(){
     return Promise.resolve(45)//podem ser passados parametros
 }
 function rejeitada(){
-    return Promise.reject()
+    return Promise.reject()//promise.reject e .resolve ambas retornan uma promise que precisa de um .then()
 }
 
 
