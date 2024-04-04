@@ -19,16 +19,22 @@ previousElementSibling: retorna o irmão anterior ou null se não houver nenhum.
 previousSibling: retorna o irmão anterior de um Node ou null se não houver nenhum.
 innerText: altera o conteúdo de um elemento de sua página (DOM) com o conteúdo tratado apenas como texto. ex: document.getElementById('Teste').innerText = '<b>teste</b>' Irá exibir: <b>teste</b>
 innerHTML altera o conteúdo de um elemento com o conteúdo tratado como HTML. ex: document.getElementById('Teste').innerHTML = '<b>teste</b>' Irá exibir: teste
-textContent: representa o conteúdo de texto do nó e seus descendentes.
+textContent: representa o conteúdo de texto do nó e seus descendentes, não permite inserir HTML, se tentar vai mostrar tudo como texto
 removeChild(child): remove um nó filho do DOM e retorna o nó removido. **antigo
 remove(child): remove um nó filho do DOM e NÂO retorna o nó removido.
 createElement(): Cria um novo nó de elemento com a tag fornecida.
 appendChild(): adiciona um nó ao final da lista de filhos de um nó pai especificado. **antigo
-append(): adiciona um nó ou uma string ao final da lista de filhos de um nó pai especificado.
+append(): adiciona um nó ou uma string ao final da lista de filhos de um nó pai especificado, se tentar inserir HTML como texto "<p>teste</p>" vai mostrar tudo como texto, parâmetro precisa ser um nó
 prepend(): insira nós ou strings no início de node.
 before(): insira nós ou strings antes node.
 after(): insira nós ou strings depois node.
 insertAdjacentHTML(): insere uma string como uma tag html ex: div.insertAdjacentHTML('beforebegin', '<p>Hello</p>'); beforebegin: inserir html imediatamente antes de div, exite tbm afterbegin, beforeend, afterend
 insertBefore(): insere um nó antes do nó de referência como um filho de um nó pai especificado. **antigo
 cloneNode(): clona o elemento
+
+
+XSS:
+
+
+
 */
