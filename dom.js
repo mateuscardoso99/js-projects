@@ -24,17 +24,11 @@ removeChild(child): remove um nó filho do DOM e retorna o nó removido. **antig
 remove(child): remove um nó filho do DOM e NÂO retorna o nó removido.
 createElement(): Cria um novo nó de elemento com a tag fornecida.
 appendChild(): adiciona um nó ao final da lista de filhos de um nó pai especificado. **antigo
-append(): adiciona um nó ou uma string ao final da lista de filhos de um nó pai especificado, se tentar inserir HTML como texto "<p>teste</p>" vai mostrar tudo como texto, parâmetro precisa ser um nó
+append(): adiciona um nó ou uma string ao final da lista de filhos de um nó pai especificado, se tentar inserir HTML como texto "<p>teste</p>" vai mostrar tudo como texto, parâmetro precisa ser um nó ou um texto, não html com texto
 prepend(): insira nós ou strings no início de node.
 before(): insira nós ou strings antes node.
 after(): insira nós ou strings depois node.
 insertAdjacentHTML(): insere uma string como uma tag html ex: div.insertAdjacentHTML('beforebegin', '<p>Hello</p>'); beforebegin: inserir html imediatamente antes de div, exite tbm afterbegin, beforeend, afterend
 insertBefore(): insere um nó antes do nó de referência como um filho de um nó pai especificado. **antigo
 cloneNode(): clona o elemento
-
-
-XSS:
-
-
-
 */
