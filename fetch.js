@@ -45,6 +45,7 @@ fetch('http://exemplo.com/usuario', options)
 //text() - retorna a resposta da requisição como uma string.
 
 
+
 //tratando erros
 fetch("http://localhost:8090/test/error", {
         method: 'GET',
@@ -96,4 +97,22 @@ fetch(url, {
         console.log(json);
       })
     });
-  
+
+
+try {
+  const response = await fetch('https://restcountries.com/v4.1/all');
+
+  if (response.ok) {
+    console.log('Promise resolved and HTTP status is successful');
+    // ...do something with the response
+  } else {
+    // Custom message for failed HTTP codes
+    if (response.status === 404) throw new Error('404, Not found');
+    if (response.status === 500) throw new Error('500, internal server error');
+    // For any other server error
+    throw new Error(response.status);
+  }
+} catch (error) {
+  console.error('Fetch', error);
+  // Output e.g.: "Fetch Error: 404, Not found"
+}
