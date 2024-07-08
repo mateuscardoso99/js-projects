@@ -13,7 +13,9 @@ const options = {
 }
 return fetch('http://exemplo.com/usuario', options).then(resp => resp.json())
 
-//o .catch() do fetch não captura os erros que a api retorna, só captura erros de rede, ele so considera falha quando não recebe uma resposta do servidor. então os errors precisam ser lançados manualmente
+//o .catch() do fetch não captura os erros que a api retorna, só captura erros de rede, ele so considera falha quando não recebe uma resposta do servidor. 
+//ele só rejeitará uma promessa se o usuário estiver offline ou se ocorrer algum erro de rede improvável, como uma falha de pesquisa de DNS. 
+//então os errors precisam ser lançados manualmente
 fetch('http://exemplo.com/usuario', options)
   .then(response => {
       // valida se a requisição falhou
