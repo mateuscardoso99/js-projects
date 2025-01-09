@@ -1,0 +1,97 @@
+ao trabalhar com arrays de objetos em javascript, e fazer var1 = var2. se eu eliminar um elemento de var2 essa alteração será refletida em var1?
+
+o comportamento de referência se aplica também a arrays de objetos em JavaScript. 
+Quando você faz var1 = var2 e var2 é um array, tanto var1 quanto var2 vão referenciar o mesmo array. 
+Ou seja, se você modificar o conteúdo do array (como eliminar um elemento, por exemplo), essa alteração será refletida em ambas as variáveis, var1 e var2.
+
+Exemplo com Array:
+let var2 = [ { nome: 'João' }, { nome: 'Maria' } ];
+let var1 = var2;
+
+console.log(var1); // [ { nome: 'João' }, { nome: 'Maria' } ]
+console.log(var2); // [ { nome: 'João' }, { nome: 'Maria' } ]
+
+// Eliminar o primeiro elemento do array em var2
+var2.shift();
+
+console.log(var1); // [ { nome: 'Maria' } ]
+console.log(var2); // [ { nome: 'Maria' } ]
+
+No exemplo acima, ao usar shift() para remover o primeiro elemento de var2, essa alteração é refletida em var1, pois ambos var1 e var2 apontam para o mesmo array.
+
+Por que isso acontece?
+Em JavaScript, quando você faz uma atribuição simples de array ou objeto (como var1 = var2), você está copiando a referência do array ou objeto, não os valores propriamente ditos. 
+Isso significa que var1 e var2 não são independentes; ambas as variáveis apontam para o mesmo array na memória.
+
+Como evitar que isso aconteça?
+Se você deseja criar uma nova cópia do array (em vez de apenas referenciá-lo), você pode usar as seguintes abordagens:
+
+1 - Usando o spread operator (...) para copiar o array (shallow copy):
+let var1 = [...var2];
+
+
+2 - Usando Array.slice() para criar uma nova cópia do array (shallow copy):
+let var1 = var2.slice();
+
+Essas duas abordagens criam um novo array, mas, assim como com objetos, elas fazem uma cópia rasa. 
+Isso significa que, se o array contiver objetos ou arrays como elementos, essas referências ainda serão compartilhadas.
+
+Exemplo de cópia rasa:
+let var2 = [ { nome: 'João' }, { nome: 'Maria' } ];
+let var1 = [...var2];
+
+console.log(var1); // [ { nome: 'João' }, { nome: 'Maria' } ]
+console.log(var2); // [ { nome: 'João' }, { nome: 'Maria' } ]
+
+// Modificar um objeto dentro de var1
+var1[0].nome = 'Carlos';
+
+console.log(var1); // [ { nome: 'Carlos' }, { nome: 'Maria' } ]
+console.log(var2); // [ { nome: 'Carlos' }, { nome: 'Maria' } ]  // A alteração também é refletida em var2
+
+Neste caso, a alteração no objeto dentro de var1 (alterando o nome de João para Carlos) também afeta var2, porque o array var1 e var2 ainda possuem as mesmas referências para os objetos internos.
+
+
+
+
+Cópia profunda (Deep Copy):
+Se você deseja uma cópia independente tanto do array quanto dos objetos internos (sem compartilhar referências), você precisa fazer uma cópia profunda. 
+Uma forma simples de realizar isso é utilizando JSON.parse(JSON.stringify(var2)):
+
+let var1 = JSON.parse(JSON.stringify(var2));
+Isso garante que tanto o array quanto os objetos internos sejam copiados de forma independente.
+
+Exemplo de cópia profunda:
+
+let var2 = [ { nome: 'João' }, { nome: 'Maria' } ];
+let var1 = JSON.parse(JSON.stringify(var2));
+
+console.log(var1); // [ { nome: 'João' }, { nome: 'Maria' } ]
+console.log(var2); // [ { nome: 'João' }, { nome: 'Maria' } ]
+
+// Modificar um objeto dentro de var1
+var1[0].nome = 'Carlos';
+
+console.log(var1); // [ { nome: 'Carlos' }, { nome: 'Maria' } ]
+console.log(var2); // [ { nome: 'João' }, { nome: 'Maria' } ]  // var2 não foi alterado
+
+Agora, as modificações em var1 não afetam var2, porque a cópia foi profunda e as referências internas foram duplicadas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
